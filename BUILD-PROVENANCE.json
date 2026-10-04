@@ -1,5 +1,5 @@
 {
-  "status": "Sideflash rc.3: RTL and labeled setup forms",
+  "status": "Sideflash rc.4: one-copy CLN connection bundle",
   "source_repository": "https://github.com/connorslab/paperclip-asp",
   "source_commit": "96a8bf0c2f98e6008a029a83b55e9291345028ac",
   "architecture": "x86_64",
@@ -7,6 +7,6 @@
   "sdk": "2.0.9",
   "packager": "start-cli 2.1.0",
   "note": "Runtime images embedded in s9pk. Local experimental base images are not public registry tags. Artifact checksums supplied separately.",
-  "runtime_image_id": "sha256:cfd43b7e4b566be6e34fc13c832bbb58b3a2f3f90bb15f59e31079c0bc7155fe",
+  "runtime_image_id": "sha256:8b271197b2bba0362efa9a2aba3d42c1cc6f9753e521422e8add86e8827b7b95",
   "postgres_image": "postgres@sha256:639ab7ceb90e13123085b741fb31ef493fba25463002f6da665352e7b534b652"
 }

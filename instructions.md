@@ -16,8 +16,8 @@ Operator UI: 3000 (bearer token). Ark client gRPC: 3535. PostgreSQL 5432, admin 
 
 ## Setup
 
-1. Configure and start the separate CLN app first. Obtain its private client bundle using **CLN gRPC** and replace its endpoint port placeholders from StartOS Interfaces.
-2. Run **Configure test app** with the JSON below. Supply your private XBT node RPC settings and an on-chain `sweep_address` you control for recovery. Set `cln` to the complete exported bundle. Leave `recipient_allowlist` empty until you have the new wallet's recipient public key. Save the returned operator access token.
+1. Configure and start the separate CLN app first. Use **Connect Ark server** to copy its private connection bundle.
+2. Run **Configure test app** with the JSON below. Supply your private XBT node RPC settings and an on-chain `sweep_address` you control for recovery. Save the backend settings, then use **Import CLN connection** to paste the exported bundle. Leave `recipient_allowlist` empty until you have the new wallet's recipient public key. Save the returned operator access token.
 3. For a pruned backend, set `pruned` to `true`. The bundled adapter indexes locally and the ASP waits for it to synchronize. Historical blocks must still be retrievable from the network; this is not instant archival recovery. Full indexed nodes may use `false`.
 4. Start the app, open **Operator interface**, enter the access token, and initialize a **new** ASP only if this is a fresh instance. Initialization creates new keys and database state. Restore backups instead when recovering an existing server.
 5. Point the test wallet to **Ark endpoint**. Create its fresh wallet, open Sideflash identity information, then copy its `recipient_pubkey` into `recipient_allowlist` and restart this ASP. The default empty list disables Sideflash receive acknowledgement.
@@ -49,3 +49,11 @@ See VALIDATION.md in the feature branch. These files have not been installed on 
 ## Labeled configuration form
 
 Configure test app now loads saved settings into separate fields. JSON examples above are reference only. Passwords and client private keys are masked. For Wallet, node RPC fields are only required when the pruned-node adapter is enabled; otherwise enter RPC settings during wallet onboarding. For Ark, enable Lightning and paste each certificate/key and endpoint into its matching field. Recipient public keys may be comma- or space-separated. Token rotation remains optional.
+
+## One-copy CLN connection (rc.4)
+
+In the running CLN app, open **Connect Ark server**. Matching enabled gRPC URLs are prefilled; otherwise copy the CLN and Hold HTTPS URLs from Interfaces. Run the action and copy the entire **Private connection bundle**. It contains spending-capable credentials: keep it private.
+
+Configure the Ark backend first, stop Ark, then open **Import CLN connection** and paste the bundle. This fills both endpoints and all three TLS credentials, enables Lightning, and preserves the other settings and tokens. Start Ark afterward. Importing validates the bundle but does not prove network reachability; your LAN/DNS and enabled interfaces still need to work.
+
+No individual certificate fields need copying. Export does not generate a funding address or move funds.
