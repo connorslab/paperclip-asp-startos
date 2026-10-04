@@ -1,0 +1,47 @@
+# Paperclip Ark Server Sideflash test
+
+This is a separate **experimental, unaudited test app** for StartOS 0.4, x86-64 only. It does not upgrade an existing production app. It creates no channels, transfers no money, and copies no existing wallet data during installation. Runtime tests are not a StartOS device installation test.
+
+Keep the entire app backup. Stop the app before a backup; the package refuses an active-state backup. Restore only with the original instance stopped. Never run both restored and original copies of the same Lightning or Ark identity. Never restore an old Lightning state over a live node.
+
+## Documentation
+
+- [Sideflash integration](https://github.com/connorslab/paperclip-asp/blob/feature/sideflash/docs/sideflash.md)
+
+## What this app provides
+
+Bitcoin Ark server, watchman, private PostgreSQL database, and optional pruned-node adapter. Reusable BOLT12 and Sideflash receive support are enabled when a CLN connection is configured.
+
+Operator UI: 3000 (bearer token). Ark client gRPC: 3535. PostgreSQL 5432, admin RPC 3536, watchman admin RPC, and adapter 18336 remain internal. The Ark endpoint is a raw HTTP/2 connection on the LAN, not an HTTPS web page.
+
+## Setup
+
+1. Configure and start the separate CLN app first. Obtain its private client bundle using **CLN gRPC** and replace its endpoint port placeholders from StartOS Interfaces.
+2. Run **Configure test app** with the JSON below. Supply your private XBT node RPC settings and an on-chain `sweep_address` you control for recovery. Set `cln` to the complete exported bundle. Leave `recipient_allowlist` empty until you have the new wallet's recipient public key. Save the returned operator access token.
+3. For a pruned backend, set `pruned` to `true`. The bundled adapter indexes locally and the ASP waits for it to synchronize. Historical blocks must still be retrievable from the network; this is not instant archival recovery. Full indexed nodes may use `false`.
+4. Start the app, open **Operator interface**, enter the access token, and initialize a **new** ASP only if this is a fresh instance. Initialization creates new keys and database state. Restore backups instead when recovering an existing server.
+5. Point the test wallet to **Ark endpoint**. Create its fresh wallet, open Sideflash identity information, then copy its `recipient_pubkey` into `recipient_allowlist` and restart this ASP. The default empty list disables Sideflash receive acknowledgement.
+6. Run **Funding balances** to inspect funding information. Funding, recovery reserve, CLN channels and receiving inventory are separate requirements. No initial funding is included. Review balances before making any deposit.
+
+The test configuration permits Lightning amounts up to 50,000 sats, targets two 50,000-sat pool outputs and retains a 20,000-sat on-chain pool refill reserve. Funding the server can trigger configured pool issuance and on-chain fees. These are lab defaults, not a production liquidity policy. Recipient fees and recovery allocations still apply.
+
+```json
+{
+  "network": "bitcoin",
+  "rpc_url": "http://NODE_LAN_IP:8332",
+  "rpc_user": "RPC_USERNAME",
+  "rpc_password": "RPC_PASSWORD",
+  "pruned": false,
+  "recipient_allowlist": [],
+  "cln": null,
+  "sweep_address": "YOUR_OWN_ONCHAIN_RECOVERY_ADDRESS"
+}
+```
+
+## Backup and access
+
+Stop the app, then use StartOS Backup. Back up all volumes, not only a seed. **Configure test app** can rotate the web access token while stopped. Client TLS credentials are independent of that token. Package signing keys are not wallet keys.
+
+## Validation limits
+
+See VALIDATION.md in the feature branch. These files have not been installed on a StartOS device by the builder. No mainnet funds are included. Start with tiny, disposable test amounts only after verifying connectivity, backup/restore and identity.

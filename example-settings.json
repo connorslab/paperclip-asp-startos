@@ -1,0 +1,10 @@
+{
+  "network": "bitcoin",
+  "rpc_url": "http://NODE_LAN_IP:8332",
+  "rpc_user": "RPC_USERNAME",
+  "rpc_password": "RPC_PASSWORD",
+  "pruned": false,
+  "recipient_allowlist": [],
+  "cln": null,
+  "sweep_address": "YOUR_OWN_ONCHAIN_RECOVERY_ADDRESS"
+}
