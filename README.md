@@ -77,3 +77,7 @@ startos: "0.4"
 version: "0.1.0:0"
 production_ready: false
 ```
+
+## Configuration form update
+
+Labeled fields and masked secrets replace raw JSON, with automatic prefill. The underlying configuration schema, tokens and data volumes remain compatible. Token rotation is optional.

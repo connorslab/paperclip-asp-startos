@@ -12,3 +12,7 @@ Passed:
 Runtime tests used isolated Docker containers without published ports. No deposits, channels or payments were created.
 
 Not verified: installation on an actual StartOS device, platform backup/restore, ARM, StartOS 0.3.5, or funded end-to-end transfers using these exact packages. Sideload as separate test apps; this is not a production release.
+
+## rc.3
+
+All SDK packages compile. 26 configuration/connection tests pass across the packages. Isolated runtime integration verifies CLN identity persistence, authenticated RTL login and node/channel reads, ASP/watchman initialization, wallet creation, signed Sideflash address generation and wallet restart. No funds moved. Labeled forms retain the saved configuration schema and tokens. StartOS device installation and restore remain unverified.

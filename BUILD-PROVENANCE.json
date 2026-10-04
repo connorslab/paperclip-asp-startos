@@ -1,5 +1,5 @@
 {
-  "status": "Sideflash rc.1: runtime validated; StartOS device validation pending",
+  "status": "Sideflash rc.3: RTL and labeled setup forms",
   "source_repository": "https://github.com/connorslab/paperclip-asp",
   "source_commit": "96a8bf0c2f98e6008a029a83b55e9291345028ac",
   "architecture": "x86_64",

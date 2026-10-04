@@ -45,3 +45,7 @@ Stop the app, then use StartOS Backup. Back up all volumes, not only a seed. **C
 ## Validation limits
 
 See VALIDATION.md in the feature branch. These files have not been installed on a StartOS device by the builder. No mainnet funds are included. Start with tiny, disposable test amounts only after verifying connectivity, backup/restore and identity.
+
+## Labeled configuration form
+
+Configure test app now loads saved settings into separate fields. JSON examples above are reference only. Passwords and client private keys are masked. For Wallet, node RPC fields are only required when the pruned-node adapter is enabled; otherwise enter RPC settings during wallet onboarding. For Ark, enable Lightning and paste each certificate/key and endpoint into its matching field. Recipient public keys may be comma- or space-separated. Token rotation remains optional.
