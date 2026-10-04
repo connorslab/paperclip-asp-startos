@@ -57,3 +57,5 @@ In the running CLN app, open **Connect Ark server**. Matching enabled gRPC URLs 
 Configure the Ark backend first, stop Ark, then open **Import CLN connection** and paste the bundle. This fills both endpoints and all three TLS credentials, enables Lightning, and preserves the other settings and tokens. Start Ark afterward. Importing validates the bundle but does not prove network reachability; your LAN/DNS and enabled interfaces still need to work.
 
 No individual certificate fields need copying. Export does not generate a funding address or move funds.
+
+The operator dashboard reports Lightning as configured or disabled from the running service state. Configured is not a payment-readiness check: verify CLN connectivity, channel capacity and Ark pool liquidity.
