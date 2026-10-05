@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=paperclip-asp:sideflash-local-test
+ARG BASE_IMAGE=paperclip-asp:sideflash-rc6
 FROM ${BASE_IMAGE}
 USER root
 COPY runtime /opt/startos

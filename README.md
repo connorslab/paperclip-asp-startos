@@ -65,7 +65,7 @@ All declared volumes are backed up together. The pre-backup guard rejects a star
 
 ## Limitations and Differences
 
-StartOS 0.4 x86-64 only; no 0.3.5 or ARM package is claimed. Experimental Sideflash recipient allowlist, server pin and 24-hour validity remain enforced. No production rollout or on-chain/Lightning spending is performed by package setup. Docker runtime checks do not verify StartOS host networking or platform restore behavior.
+StartOS 0.4 x86-64 only; no 0.3.5 or ARM package is claimed. Sideflash ownership, server binding and 24-hour validity remain enforced. Manual recipient allowlisting is optional when automatic registration is enabled. No production rollout or on-chain/Lightning spending is performed by package setup. Docker runtime checks do not verify StartOS host networking or platform restore behavior.
 
 ## Quick Reference for AI Consumers
 
@@ -81,3 +81,9 @@ production_ready: false
 ## Configuration form update
 
 Labeled fields and masked secrets replace raw JSON, with automatic prefill. The underlying configuration schema, tokens and data volumes remain compatible. Token rotation is optional.
+
+## Automatic Sideflash registration (rc.6)
+
+Automatic registration is enabled by default in this test package. Wallets no longer need manual recipient approval. The ASP still verifies recipient signatures, its server/chain binding, an active wallet-owned BOLT12 offer, request size and expiry. Disable automatic registration to require the recipient list again. This does not enable public networking or move funds.
+
+If Ark cannot resolve your CLN hostname, set **CLN connection IP (optional)** to the CLN host LAN IP. Keep the original HTTPS hostname in both URLs so certificate checks remain valid. This mapping is reapplied at startup; update it if the host IP changes. Use the IP of your own CLN host.

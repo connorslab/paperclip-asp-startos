@@ -1,12 +1,12 @@
 {
-  "status": "Sideflash rc.5: configured onboarding, automatic offers and accurate Lightning status",
+  "status": "Sideflash rc.6: automatic verified registration and persistent endpoint DNS mapping",
   "source_repository": "https://github.com/connorslab/paperclip-asp",
-  "source_commit": "528263defba567fb9f71ca4cddf06dc05a060b55",
+  "source_commit": "6d301e8bfd4b5c6d7be273a4e58e32527f0fe5a1",
   "architecture": "x86_64",
   "startos": "0.4",
   "sdk": "2.0.9",
   "packager": "start-cli 2.1.0",
-  "note": "Runtime images embedded in s9pk. Local experimental base images are not public registry tags. Artifact checksums supplied separately. ASP executable remains at 96a8bf0c2f98e6008a029a83b55e9291345028ac; this update overlays only operator-web from source_commit.",
-  "runtime_image_id": "sha256:93c0ab08d48e92d7d5c2d30f97e3ff3a3d4c6ccd8dd8fc1b0d8754137f67ae90",
+  "note": "Runtime images embedded in s9pk. Native ASP/watchman rebuilt from the source revision; operator-web overlay retained. Local build tags are not public registry tags. Artifact checksums supplied separately.",
+  "runtime_image_id": "sha256:4d7f02326efa2418621463404a6c78cdf6487bab8c6a82f33aaa872c5ec82739",
   "postgres_image": "postgres@sha256:639ab7ceb90e13123085b741fb31ef493fba25463002f6da665352e7b534b652"
 }

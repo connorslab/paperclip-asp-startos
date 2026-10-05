@@ -1,4 +1,4 @@
-import json, os, re, tempfile, urllib.request, base64
+import json, os, re, tempfile, urllib.request, base64, ipaddress
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -30,6 +30,8 @@ def validate(kind,c):
         if pin and not re.fullmatch(r'0[23][0-9a-fA-F]{64}',pin): raise ValueError('Invalid full server public key')
         if not re.fullmatch(r'[A-Za-z0-9 _.-]{1,32}',c['alias']): raise ValueError('Invalid alias')
     if kind=='ark':
+        if not isinstance(c.get('auto_register',True),bool): raise ValueError('Invalid automatic registration setting')
+        if c.get('cln_connect_ip'): ipaddress.ip_address(c['cln_connect_ip'])
         if not isinstance(c.get('sweep_address'),str) or not re.fullmatch(r'(bc1|bcrt1)[023456789acdefghjklmnpqrstuvwxyz]{20,90}',c['sweep_address']): raise ValueError('Set an operator-owned recovery sweep address')
         for key in c.get('recipient_allowlist',[]):
             if not re.fullmatch(r'0[23][0-9a-fA-F]{64}',key): raise ValueError('Invalid recipient public key')

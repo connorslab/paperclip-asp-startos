@@ -17,10 +17,10 @@ Operator UI: 3000 (bearer token). Ark client gRPC: 3535. PostgreSQL 5432, admin 
 ## Setup
 
 1. Configure and start the separate CLN app first. Use **Connect Ark server** to copy its private connection bundle.
-2. Run **Configure test app** with the JSON below. Supply your private XBT node RPC settings and an on-chain `sweep_address` you control for recovery. Save the backend settings, then use **Import CLN connection** to paste the exported bundle. Leave `recipient_allowlist` empty until you have the new wallet's recipient public key. Save the returned operator access token.
+2. Run **Configure test app** using the labeled fields (JSON below is reference only). Supply your private XBT node RPC settings and an on-chain `sweep_address` you control for recovery. Save the backend settings, then use **Import CLN connection** to paste the exported bundle. Leave automatic registration enabled; no recipient keys are needed. Save the returned operator access token.
 3. For a pruned backend, set `pruned` to `true`. The bundled adapter indexes locally and the ASP waits for it to synchronize. Historical blocks must still be retrievable from the network; this is not instant archival recovery. Full indexed nodes may use `false`.
 4. Start the app, open **Operator interface**, enter the access token, and initialize a **new** ASP only if this is a fresh instance. Initialization creates new keys and database state. Restore backups instead when recovering an existing server.
-5. Point the test wallet to **Ark endpoint**. Create its fresh wallet, open Sideflash identity information, then copy its `recipient_pubkey` into `recipient_allowlist` and restart this ASP. The default empty list disables Sideflash receive acknowledgement.
+5. Point the test wallet to **Ark endpoint**. Create its fresh wallet and open Sideflash receiving. With automatic registration enabled, the ASP verifies the wallet and acknowledges its address without manual recipient approval.
 6. Run **Funding balances** to inspect funding information. Funding, recovery reserve, CLN channels and receiving inventory are separate requirements. No initial funding is included. Review balances before making any deposit.
 
 The test configuration permits Lightning amounts up to 50,000 sats, targets two 50,000-sat pool outputs and retains a 20,000-sat on-chain pool refill reserve. Funding the server can trigger configured pool issuance and on-chain fees. These are lab defaults, not a production liquidity policy. Recipient fees and recovery allocations still apply.
@@ -59,3 +59,9 @@ Configure the Ark backend first, stop Ark, then open **Import CLN connection** a
 No individual certificate fields need copying. Export does not generate a funding address or move funds.
 
 The operator dashboard reports Lightning as configured or disabled from the running service state. Configured is not a payment-readiness check: verify CLN connectivity, channel capacity and Ark pool liquidity.
+
+## Automatic Sideflash registration (rc.6)
+
+Automatic registration is enabled by default in this test package. Wallets no longer need manual recipient approval. The ASP still verifies recipient signatures, its server/chain binding, an active wallet-owned BOLT12 offer, request size and expiry. Disable automatic registration to require the recipient list again. This does not enable public networking or move funds.
+
+If Ark cannot resolve your CLN hostname, set **CLN connection IP (optional)** to the CLN host LAN IP. Keep the original HTTPS hostname in both URLs so certificate checks remain valid. This mapping is reapplied at startup; update it if the host IP changes. Use the IP of your own CLN host.

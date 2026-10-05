@@ -24,3 +24,7 @@ CLN and Ark SDK compilation passed. Export/import of actual test credentials pas
 ## rc.5
 
 Rust workspace `just checks` and StartOS SDK checks/builds passed. The native wallet is built with `barkd-web-ui,experimental-sideflash`. Exact runtime images passed isolated CLN/RTL authentication and identity persistence, CLN credential export/import, ASP/watchman initialization and configured Lightning status. Wallet defaults API returned the configured Ark URL; fresh wallet setup automatically created an offer, repeated setup reused it, signed Sideflash address generation succeeded (818 characters), restart preserved state, and a disabled offer remained disabled. No funds moved. StartOS device installation/restore and funded transfers with these exact artifacts remain unverified.
+
+## rc.6
+
+Rust `just checks`, StartOS SDK typecheck/build, and all 14 configuration/import/hostname tests passed. Exact images passed the isolated service suite: restricted mode with no recipient keys rejected registration; enabling automatic registration with the list still empty generated a valid signed Sideflash address. Wallet offer reuse, restart persistence and disabled-offer behavior passed. CLN/RTL credentials and ASP/watchman initialization passed. DNS mapping tests cover idempotent application, removal and invalid IP rejection. No funds moved. This artifact has not been installed/restored on StartOS hardware or used for a funded transfer.
