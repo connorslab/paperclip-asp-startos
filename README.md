@@ -87,3 +87,7 @@ Labeled fields and masked secrets replace raw JSON, with automatic prefill. The 
 Automatic registration is enabled by default in this test package. Wallets no longer need manual recipient approval. The ASP still verifies recipient signatures, its server/chain binding, an active wallet-owned BOLT12 offer, request size and expiry. Disable automatic registration to require the recipient list again. This does not enable public networking or move funds.
 
 If Ark cannot resolve your CLN hostname, set **CLN connection IP (optional)** to the CLN host LAN IP. Keep the original HTTPS hostname in both URLs so certificate checks remain valid. This mapping is reapplied at startup; update it if the host IP changes. Use the IP of your own CLN host.
+
+## End-user setup
+
+See the [CLN → Ark → Wallet setup guide](SETUP-GUIDE.md) for the complete LAN configuration flow.
